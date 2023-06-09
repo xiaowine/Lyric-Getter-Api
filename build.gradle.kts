@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "cn.lyrics.getter.api";
+    namespace = "cn.lyric.getter.api";
     compileSdk = 33
 
     defaultConfig {

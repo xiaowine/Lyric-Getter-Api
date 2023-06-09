@@ -1,1 +1,1 @@
--keep class cn.lyrics.getter.api.* {*;}
+-keep class cn.lyric.getter.api.* {*;}

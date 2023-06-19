@@ -1,11 +1,6 @@
 package cn.lyric.getter.api.tools
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.IntentFilter
-import android.os.Build
-import cn.lyric.getter.api.LyricReceiver
-import cn.lyric.getter.api.data.LyricData
 
 object EventTools {
     fun hasEnable(): Boolean {
@@ -38,21 +33,5 @@ object EventTools {
     fun sendLyric(context: Context?, lyric: String?, customIcon: Boolean, base64Icon: String?, useOwnMusicController: Boolean, serviceName: String?, packageName: String?) {}
 
 
-    /**
-     * 接待抒情
-     * @param [context] Context
-     * @param [callback] 收到歌词的回调
-     */
-    @SuppressLint("UnspecifiedRegisterReceiverFlag")
-    fun receptionLyric(context: Context, callback: (LyricData) -> Unit) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            context.registerReceiver(LyricReceiver(callback), IntentFilter().apply {
-                addAction("Lyric_Data")
-            }, Context.RECEIVER_EXPORTED)
-        } else {
-            context.registerReceiver(LyricReceiver(callback), IntentFilter().apply {
-                addAction("Lyric_Data")
-            })
-        }
-    }
+
 }

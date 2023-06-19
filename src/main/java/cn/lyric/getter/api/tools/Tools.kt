@@ -1,8 +1,14 @@
 package cn.lyric.getter.api.tools
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.IntentFilter
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.os.Build
 import android.util.Base64
+import cn.lyric.getter.api.LyricReceiver
+import cn.lyric.getter.api.data.LyricData
 import java.io.ByteArrayOutputStream
 
 object Tools {
@@ -33,5 +39,22 @@ object Tools {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
         val bytes = stream.toByteArray()
         return Base64.encodeToString(bytes, Base64.DEFAULT)
+    }
+    /**
+     * 接待抒情
+     * @param [context] Context
+     * @param [callback] 收到歌词的回调
+     */
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
+    fun receptionLyric(context: Context, callback: (LyricData) -> Unit) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            context.registerReceiver(LyricReceiver(callback), IntentFilter().apply {
+                addAction("Lyric_Data")
+            }, Context.RECEIVER_EXPORTED)
+        } else {
+            context.registerReceiver(LyricReceiver(callback), IntentFilter().apply {
+                addAction("Lyric_Data")
+            })
+        }
     }
 }

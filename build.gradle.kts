@@ -5,12 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "cn.lyric.getter.api";
+    namespace = "cn.lyric.getter.api"
     compileSdk = 33
 
     defaultConfig {
         minSdk = 26
-
     }
 
     buildTypes {
@@ -24,7 +23,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = JavaVersion.VERSION_11.majorVersion
     }
 }
 

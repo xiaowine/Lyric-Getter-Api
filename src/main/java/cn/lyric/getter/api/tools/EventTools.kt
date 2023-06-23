@@ -3,9 +3,7 @@ package cn.lyric.getter.api.tools
 import android.content.Context
 
 object EventTools {
-    fun hasEnable(): Boolean {
-        return false
-    }
+    fun hasEnable() = false
 
 
     /**
@@ -15,7 +13,7 @@ object EventTools {
      * @param lyric       歌词
      * @param packageName 音乐包名
      */
-    fun sendLyric(context: Context?, lyric: String?, packageName: String?) {
+    fun sendLyric(context: Context, lyric: String, packageName: String) {
         sendLyric(context, lyric, false, "", false, "", packageName)
     }
 
@@ -30,8 +28,8 @@ object EventTools {
      * @param serviceName           音乐服务名称，仅在useOwnMusicController为false时生效
      * @param packageName           音乐包名
      */
-    fun sendLyric(context: Context?, lyric: String?, customIcon: Boolean, base64Icon: String?, useOwnMusicController: Boolean, serviceName: String?, packageName: String?) {}
+    fun sendLyric(context: Context, lyric: String, customIcon: Boolean, base64Icon: String, useOwnMusicController: Boolean, serviceName: String, packageName: String) {}
 
-
+    fun stopLyric(context: Context) {}
 
 }

@@ -8,5 +8,5 @@
 > 注意
 若开启了 proguard 请保证 API 类不被混淆:
 ```shrinker_config
--keep class cn.lyric.getter.api.**{*;}
+-keep class cn.lyric.getter.api.data.*{*;}
 ```

@@ -20,3 +20,4 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 -keep class cn.lyric.getter.api.data.*{*;}
+-keep class cn.lyric.getter.api.tools.EventTools{*;}

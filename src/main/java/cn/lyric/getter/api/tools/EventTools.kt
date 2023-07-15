@@ -3,7 +3,7 @@ package cn.lyric.getter.api.tools
 import android.content.Context
 
 object EventTools {
-    const val API_VERSION = 3
+    const val API_VERSION = 4
     fun hasEnable() = false
 
 

@@ -52,7 +52,7 @@ object Tools {
      * @return [String] 返回图片的Base64
      */
     fun drawableToBase64(drawable: Drawable): String {
-        Log.d("aaaaaa",drawable::class.java.name)
+        Log.d("aaaaaa", drawable::class.java.name)
         when (drawable) {
             is BitmapDrawable -> {
                 return drawableToBase64(drawable.bitmap)
@@ -96,7 +96,8 @@ object Tools {
      * @param [callback] 收到歌词的回调
      */
     @SuppressLint("UnspecifiedRegisterReceiverFlag")
-    fun receptionLyric(context: Context, callback: (LyricData) -> Unit) {
+    fun receptionLyric(context: Context, apiVersion: Int, callback: (LyricData) -> Unit) {
+        if (apiVersion != EventTools.API_VERSION) return
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             context.registerReceiver(LyricReceiver(callback), IntentFilter().apply {
                 addAction("Lyric_Data")

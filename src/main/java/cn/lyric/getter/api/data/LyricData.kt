@@ -11,7 +11,7 @@ class LyricData : Serializable {
     var base64Icon: String = ""
     var useOwnMusicController = false
     override fun toString(): String {
-        return "{\"type\":\"$type\",\"lyric\":\"$lyric\",\"customIcon\":$customIcon,\"serviceName\":\"$serviceName\",\"packageName\":\"$packageName\",\"base64Icon\":\"$base64Icon\",\"base64Icon\":\"$useOwnMusicController\"}"
+        return "{\"type\":\"$type\",\"lyric\":\"$lyric\",\"customIcon\":$customIcon,\"serviceName\":\"$serviceName\",\"packageName\":\"$packageName\",\"base64Icon\":\"$base64Icon\",\"useOwnMusicController\":\"$useOwnMusicController\"}"
     }
 
     companion object {

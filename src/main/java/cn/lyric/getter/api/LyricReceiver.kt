@@ -11,9 +11,9 @@ class LyricReceiver(val callback: (LyricData) -> Unit) : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         runCatching {
             val lyricData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                intent.getSerializableExtra("Data", LyricData::class.java)!!
+                intent.getParcelableExtra("Data", LyricData::class.java)!!
             } else {
-                intent.getSerializableExtra("Data") as LyricData
+                intent.getParcelableExtra("Data")!!
             }
             callback(lyricData)
         }

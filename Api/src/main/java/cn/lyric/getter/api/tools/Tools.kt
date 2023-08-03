@@ -12,24 +12,13 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.VectorDrawable
 import android.os.Build
 import android.util.Base64
-import android.util.Log
+import cn.lyric.getter.api.LyricListener
 import cn.lyric.getter.api.LyricReceiver
-import cn.lyric.getter.api.data.LyricData
 import java.io.ByteArrayOutputStream
 
 
 object Tools {
-
-    private fun makeDrawableToBitmap(drawable: Drawable): Bitmap {
-        val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        drawable.apply {
-            setBounds(0, 0, canvas.width, canvas.height)
-            draw(canvas)
-        }
-        return bitmap
-    }
-
+    private lateinit var lyricReceiver: LyricReceiver
 
     /**
      *
@@ -52,17 +41,17 @@ object Tools {
      * @return [String] 返回图片的Base64
      */
     fun drawableToBase64(drawable: Drawable): String {
-        Log.d("aaaaaa", drawable::class.java.name)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (drawable is AdaptiveIconDrawable) {
+                return drawableToBase64(makeDrawableToBitmap(drawable))
+            }
+        }
         when (drawable) {
             is BitmapDrawable -> {
                 return drawableToBase64(drawable.bitmap)
             }
 
             is VectorDrawable -> {
-                return drawableToBase64(makeDrawableToBitmap(drawable))
-            }
-
-            is AdaptiveIconDrawable -> {
                 return drawableToBase64(makeDrawableToBitmap(drawable))
             }
 
@@ -90,22 +79,42 @@ object Tools {
         return Base64.encodeToString(bytes, Base64.DEFAULT)
     }
 
+    private fun makeDrawableToBitmap(drawable: Drawable): Bitmap {
+        val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        drawable.apply {
+            setBounds(0, 0, canvas.width, canvas.height)
+            draw(canvas)
+        }
+        return bitmap
+    }
+
+
     /**
-     * 接待抒情
+     * 注册歌词监听器
      * @param [context] Context
-     * @param [callback] 收到歌词的回调
+     * @param [apiVersion] 当前Api版本
+     * @param [lyricListener] LyricListener
      */
     @SuppressLint("UnspecifiedRegisterReceiverFlag")
-    fun receptionLyric(context: Context, apiVersion: Int, callback: (LyricData) -> Unit) {
+    fun registerLyricListener(context: Context, apiVersion: Int, lyricListener: LyricListener) {
         if (apiVersion != EventTools.API_VERSION) return
+        val intentFilter = IntentFilter().apply { addAction("Lyric_Data") }
+        lyricReceiver = LyricReceiver(lyricListener)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            context.registerReceiver(LyricReceiver(callback), IntentFilter().apply {
-                addAction("Lyric_Data")
-            }, Context.RECEIVER_EXPORTED)
+            context.registerReceiver(lyricReceiver, intentFilter, Context.RECEIVER_EXPORTED)
         } else {
-            context.registerReceiver(LyricReceiver(callback), IntentFilter().apply {
-                addAction("Lyric_Data")
-            })
+            context.registerReceiver(lyricReceiver, intentFilter)
         }
     }
+
+    /**
+     * 注销歌词监听器
+     * @param [context] Context
+     */
+    fun unregisterLyricListener(context: Context) {
+        if (!::lyricReceiver.isInitialized) return
+        context.unregisterReceiver(lyricReceiver)
+    }
+
 }

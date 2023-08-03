@@ -6,8 +6,12 @@ import android.content.Intent
 import android.os.Build
 import cn.lyric.getter.api.data.LyricData
 
-class LyricReceiver(val callback: (LyricData) -> Unit) : BroadcastReceiver() {
 
+interface LyricListener {
+    fun onReceived(lyricData: LyricData)
+}
+
+class LyricReceiver(private val lyricListener: LyricListener) : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         runCatching {
             val lyricData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -15,7 +19,7 @@ class LyricReceiver(val callback: (LyricData) -> Unit) : BroadcastReceiver() {
             } else {
                 intent.getParcelableExtra("Data")!!
             }
-            callback(lyricData)
+            lyricListener.onReceived(lyricData)
         }
     }
 }

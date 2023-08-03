@@ -1,9 +1,10 @@
 package cn.lyric.getter.api.tools
 
 import android.content.Context
+import cn.lyric.getter.api.BuildConfig
 
 object EventTools {
-    const val API_VERSION = 5
+    const val API_VERSION = BuildConfig.API_VERSION
     fun hasEnable() = false
 
 

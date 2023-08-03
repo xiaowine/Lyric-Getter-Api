@@ -14,6 +14,7 @@ allprojects {
     }
 }
 ```
+or
 ```kotlin
 allprojects {
     repositories {
@@ -35,6 +36,7 @@ dependencies {
     implementation 'com.github.xiaowine:Lyric-Getter-Api:<VERSION>'
 }
 ```
+or
 ```kotlin
 dependencies {
     // ...

@@ -4,8 +4,43 @@
 
 > 使用方法
 
-把本项目当作Git子模块导入到自己的项目中，并在settings.gradle.kts或者settings.gradle中导入模块  
-具体请看 [Demo](https://github.com/xiaowine/LyricGetterApiDemo)
+### 1. 项目 Gradle 添加 JitPack 依赖
+
+```groovy
+allprojects {
+    repositories {
+        // ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+```kotlin
+allprojects {
+    repositories {
+        // ...
+        maven("https://jitpack.io")
+    }
+}
+```
+
+### 2. 要使用的模块下添加 SaltUI 依赖
+
+最新版本⬇️⬇️⬇️
+
+[![](https://jitpack.io/v/xiaowine/Lyric-Getter-Api.svg)](https://jitpack.io/#xiaowine/Lyric-Getter-Api/)
+
+```groovy
+dependencies {
+    // ...
+    implementation 'com.github.xiaowine:Lyric-Getter-Api:<VERSION>'
+}
+```
+```kotlin
+dependencies {
+    // ...
+    implementation("com.github.xiaowine:Lyric-Getter-Api:<VERSION>")
+}
+```
 
 > 注意
 > 若开启了 proguard 请保证 API 类不被混淆:

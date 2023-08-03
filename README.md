@@ -1,6 +1,6 @@
-# LyricGetterApi
+# Lyric-Getter-API
 
-### 这是Lyric Getter 的API
+### 这是Lyric Getter 的API，用于收发歌词
 
 > 使用方法
 
@@ -14,7 +14,9 @@ allprojects {
     }
 }
 ```
+
 or
+
 ```kotlin
 allprojects {
     repositories {
@@ -24,7 +26,7 @@ allprojects {
 }
 ```
 
-### 2. 要使用的模块下添加 SaltUI 依赖
+### 2. 要使用的模块下添加 Lyric-Getter-API 依赖
 
 最新版本⬇️⬇️⬇️
 
@@ -36,7 +38,9 @@ dependencies {
     implementation 'com.github.xiaowine:Lyric-Getter-Api:<VERSION>'
 }
 ```
+
 or
+
 ```kotlin
 dependencies {
     // ...

@@ -50,7 +50,7 @@ dependencies {
 }
 ```
 
-### 3.具体使用请见[Demo](/app/src/main/java/cn/lyric/getter/api/demo/MainActivity.kt)
+### 3.具体使用请见[Demo](/app/src/main/java/cn/lyric/getter/api/demo/MainActivity.kt)  或查看[API](/Api)
 ---
 
 ## 注意 若开启了 proguard 请保证 API 类不被混淆:

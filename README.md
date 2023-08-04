@@ -50,19 +50,13 @@ dependencies {
 }
 ```
 
+### 3.具体使用请见Demo(/app)
 ---
 
 ## 注意 若开启了 proguard 请保证 API 类不被混淆:
 
-> 接收歌词
-
 ```shrinker_config
 -keep class cn.lyric.getter.api.data.*{*;}
-```
-
-> 发送歌词
-
-```shrinker_config
 -keep class cn.lyric.getter.api.tools.EventTools{*;}
 ```
 

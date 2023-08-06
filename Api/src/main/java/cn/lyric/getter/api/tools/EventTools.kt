@@ -6,7 +6,7 @@ import cn.lyric.getter.api.BuildConfig
 object EventTools {
     const val API_VERSION = BuildConfig.API_VERSION
 
-    const val hasEnable = false
+    val hasEnable = false
 
     fun sendLyric(context: Context, lyric: String) {
         sendLyric(context, lyric, false, "", false, "", context.packageName, 0)

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import cn.lyric.getter.api.LyricListener
 import cn.lyric.getter.api.data.DataType
 import cn.lyric.getter.api.data.LyricData
@@ -39,8 +40,8 @@ class MainActivity : Activity() {
         }
 
 //        注册歌词监听器
-        registerLyricListener(applicationContext, EventTools.API_VERSION, object : LyricListener {
-            override fun onReceived(lyricData: LyricData) {
+        registerLyricListener(applicationContext, EventTools.API_VERSION, object : LyricListener() {
+            override fun onUpdate(lyricData: LyricData) {
                 findViewById<TextView>(R.id.lyric).text = "Lyric：${if (lyricData.type == DataType.UPDATE) lyricData.lyric else " 暂停播放 "}"
                 findViewById<TextView>(R.id.type).text = "Type：${lyricData.type}"
                 findViewById<TextView>(R.id.customIcon).text = "CustomIcon：${lyricData.customIcon}"
@@ -54,6 +55,10 @@ class MainActivity : Activity() {
                 } else {
                     findViewById<ImageView>(R.id.icon).setImageBitmap(null)
                 }
+            }
+
+            override fun onStop(lyricData: LyricData) {
+                Toast.makeText(applicationContext, "歌词停止播放", Toast.LENGTH_SHORT).show()
             }
         })
     }

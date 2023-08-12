@@ -9,6 +9,7 @@ import android.graphics.Canvas
 import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.VectorDrawable
 import android.os.Build
 import android.util.Base64
@@ -43,7 +44,7 @@ object Tools {
     fun drawableToBase64(drawable: Drawable): String {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (drawable is AdaptiveIconDrawable) {
-                return drawableToBase64(makeDrawableToBitmap(drawable))
+                return adaptiveIconDrawableBase64(drawable)
             }
         }
         when (drawable) {
@@ -65,6 +66,30 @@ object Tools {
         }
     }
 
+    /**
+     * 将自适应图标转换为位图
+     *
+     * @param drawable
+     * @return [String] 返回自适应图的Base64
+     */
+    private fun adaptiveIconDrawableBase64(drawable: AdaptiveIconDrawable): String {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val background = drawable.background
+            val foreground = drawable.foreground
+            if (background != null && foreground != null) {
+                val layerDrawable = LayerDrawable(arrayOf(background, foreground))
+                val createBitmap = Bitmap.createBitmap(layerDrawable.intrinsicWidth, layerDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+                val canvas = Canvas(createBitmap)
+                layerDrawable.setBounds(0, 0, canvas.width, canvas.height)
+                layerDrawable.draw(canvas)
+                drawableToBase64(createBitmap)
+            } else {
+                ""
+            }
+        } else {
+            ""
+        }
+    }
 
     /**
      * 将Bitmap转换成Base64

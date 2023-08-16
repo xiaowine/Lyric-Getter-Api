@@ -1,9 +1,11 @@
 package cn.lyric.getter.api.data
 
+import android.annotation.SuppressLint
+import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
 
-class LyricData : Parcelable {
+@SuppressLint("ParcelClassLoader") class LyricData private constructor(parcel: Parcel) : Parcelable {
     var type: DataType = DataType.UPDATE
     var lyric: String = ""
     var customIcon = false
@@ -12,25 +14,41 @@ class LyricData : Parcelable {
     var base64Icon: String = ""
     var useOwnMusicController = false
     var delay = 0
+    var extra: HashMap<String, Any>? = null
 
-    constructor()
+    constructor() : this(Parcel.obtain())
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
-        dest.writeInt(type.ordinal)
-        dest.writeString(lyric)
-        dest.writeInt(if (customIcon) 1 else 0)
-        dest.writeString(serviceName)
-        dest.writeString(packageName)
-        dest.writeString(base64Icon)
-        dest.writeInt(if (useOwnMusicController) 1 else 0)
-        dest.writeInt(delay)
+        dest.apply {
+            writeInt(type.ordinal)
+            writeString(lyric)
+            writeInt(if (customIcon) 1 else 0)
+            writeString(serviceName)
+            writeString(packageName)
+            writeString(base64Icon)
+            writeInt(if (useOwnMusicController) 1 else 0)
+            writeInt(delay)
+            val bundle = Bundle().apply {
+                extra?.forEach {
+                    when (it.value) {
+                        BaseType.String -> putString(it.key, it.value as String)
+                        BaseType.Int -> putInt(it.key, it.value as Int)
+                        BaseType.Boolean -> putBoolean(it.key, it.value as Boolean)
+                        BaseType.Float -> putFloat(it.key, it.value as Float)
+                        BaseType.Long -> putLong(it.key, it.value as Long)
+                        BaseType.Double -> putDouble(it.key, it.value as Double)
+                    }
+                }
+            }
+            writeBundle(bundle)
+        }
     }
 
     override fun describeContents(): Int {
         return 0
     }
 
-    private constructor(parcel: Parcel) {
+    init {
         type = DataType.values()[parcel.readInt()]
         lyric = parcel.readString() ?: ""
         customIcon = parcel.readInt() != 0
@@ -39,10 +57,17 @@ class LyricData : Parcelable {
         base64Icon = parcel.readString() ?: ""
         useOwnMusicController = parcel.readInt() != 0
         delay = parcel.readInt()
+        extra = parcel.readBundle().let {
+            val hashMap = HashMap<String, Any>()
+            it?.keySet()?.forEach { key ->
+                hashMap[key] = it.get(key) as Any
+            }
+            return@let hashMap
+        }
     }
 
     override fun toString(): String {
-        return "{\"type\":\"$type\",\"lyric\":\"$lyric\",\"customIcon\":$customIcon,\"serviceName\":\"$serviceName\",\"packageName\":\"$packageName\",\"base64Icon\":\"$base64Icon\",\"useOwnMusicController\":\"$useOwnMusicController\",\"delay\":\"$delay\"}"
+        return "{\"type\":\"$type\",\"lyric\":\"$lyric\",\"customIcon\":$customIcon,\"serviceName\":\"$serviceName\",\"packageName\":\"$packageName\",\"base64Icon\":\"$base64Icon\",\"useOwnMusicController\":\"$useOwnMusicController\",\"delay\":\"$delay\",\"extra\":\"$extra\"}"
     }
 
     override fun equals(other: Any?): Boolean {
@@ -61,6 +86,7 @@ class LyricData : Parcelable {
         result = 31 * result + base64Icon.hashCode()
         result = 31 * result + useOwnMusicController.hashCode()
         result = 31 * result + delay
+        result = 31 * result + extra.hashCode()
         return result
     }
 

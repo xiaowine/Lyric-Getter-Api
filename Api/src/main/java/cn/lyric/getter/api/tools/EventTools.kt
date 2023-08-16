@@ -9,21 +9,24 @@ object EventTools {
     val hasEnable = false
 
     fun sendLyric(context: Context, lyric: String) {
-        sendLyric(context, lyric, false, "", false, "", context.packageName, 0)
+        sendLyric(context, lyric, false, "", false, "", context.packageName, 0, null)
     }
 
     fun sendLyric(context: Context, lyric: String, delay: Int) {
-        sendLyric(context, lyric, false, "", false, "", context.packageName, delay)
+        sendLyric(context, lyric, false, "", false, "", context.packageName, delay, null)
     }
 
     fun sendLyric(context: Context, lyric: String, packageName: String) {
-        sendLyric(context, lyric, false, "", false, "", packageName, 0)
+        sendLyric(context, lyric, false, "", false, "", packageName, 0, null)
     }
 
     fun sendLyric(context: Context, lyric: String, packageName: String, delay: Int) {
-        sendLyric(context, lyric, false, "", false, "", packageName, delay)
+        sendLyric(context, lyric, false, "", false, "", packageName, delay, null)
     }
 
+    fun sendLyric(context: Context, lyric: String, customIcon: Boolean, base64Icon: String, useOwnMusicController: Boolean, serviceName: String, packageName: String, delay: Int) {
+        sendLyric(context, lyric, customIcon, base64Icon, useOwnMusicController, serviceName, packageName, delay, null)
+    }
 
     /**
      * 发送歌词
@@ -36,8 +39,9 @@ object EventTools {
      * @param serviceName           音乐服务名称，仅在useOwnMusicController为false时生效
      * @param packageName           音乐包名
      * @param delay                 歌词显示时间，单位s，默认0
+     * @param extra                 额外数据
      */
-    fun sendLyric(context: Context, lyric: String, customIcon: Boolean, base64Icon: String, useOwnMusicController: Boolean, serviceName: String, packageName: String, delay: Int) {}
+    fun sendLyric(context: Context, lyric: String, customIcon: Boolean, base64Icon: String, useOwnMusicController: Boolean, serviceName: String, packageName: String, delay: Int, extra: HashMap<String, Any>?) {}
 
     fun stopLyric(context: Context) {}
 

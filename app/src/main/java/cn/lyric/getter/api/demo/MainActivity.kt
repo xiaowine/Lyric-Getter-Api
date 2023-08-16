@@ -25,6 +25,10 @@ class MainActivity : Activity() {
         setContentView(R.layout.activity_main)
 //        检查激活状态
         findViewById<TextView>(R.id.activation).text = "激活状态：${EventTools.hasEnable}"
+//        开始监听歌词
+        findViewById<Button>(R.id.start).setOnClickListener {
+            start()
+        }
 //        发送歌词的几种方式（不完全展示）
         findViewById<Button>(R.id.send).setOnClickListener {
             EventTools.sendLyric(applicationContext, "${(0..1000).random()}${getString(R.string.app_name)}", applicationContext.packageName)
@@ -33,13 +37,22 @@ class MainActivity : Activity() {
             EventTools.sendLyric(applicationContext, "${(0..1000).random()}${getString(R.string.app_name)}", true, drawableToBase64(getDrawable(R.drawable.ic_launcher_foreground)!!), false, "", applicationContext.packageName, 0)
         }
         findViewById<Button>(R.id.send3).setOnClickListener {
-            EventTools.sendLyric(applicationContext, "${(0..1000).random()}${getString(R.string.app_name)}", true, drawableToBase64(getDrawable(R.mipmap.ic_launcher)!!), false, "", applicationContext.packageName, 0)
+            EventTools.sendLyric(applicationContext, "${(0..1000).random()}${getString(R.string.app_name)}")
         }
         findViewById<Button>(R.id.clean).setOnClickListener {
             EventTools.stopLyric(applicationContext)
         }
+//        取消监听
+        findViewById<Button>(R.id.stop).setOnClickListener {
+            unregisterLyricListener(applicationContext)
+        }
 
-//        注册歌词监听器
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun start() {
+        //        注册歌词监听器
         registerLyricListener(applicationContext, EventTools.API_VERSION, object : LyricListener() {
             override fun onUpdate(lyricData: LyricData) {
                 findViewById<TextView>(R.id.lyric).text = "Lyric：${if (lyricData.type == DataType.UPDATE) lyricData.lyric else " 暂停播放 "}"
@@ -66,7 +79,7 @@ class MainActivity : Activity() {
     override fun onDestroy() {
         EventTools.stopLyric(applicationContext)
 //        取消注册歌词监听器
-        unregisterLyricListener()
+        unregisterLyricListener(applicationContext)
         super.onDestroy()
     }
 }

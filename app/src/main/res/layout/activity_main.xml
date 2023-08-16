@@ -1,102 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/dialog_root"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/activation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="send" />
-    <Button
-        android:id="@+id/send2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="send2" />
-    <Button
-        android:id="@+id/send3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="send3" />
-    <Button
-        android:id="@+id/clean"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="clean" />
-
-    <TextView
+    <LinearLayout
+        android:id="@+id/dialog_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#03A9F4" />
-
-    <TextView
-        android:id="@+id/lyric"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center" />
-
-    <TextView
-        android:id="@+id/type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center" />
-
-    <TextView
-        android:id="@+id/customIcon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center" />
-
-    <TextView
-        android:id="@+id/serviceName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center" />
-
-    <TextView
-        android:id="@+id/packageName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center" />
-
-    <TextView
-        android:id="@+id/base64Icon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center" />
-
-    <TextView
-        android:id="@+id/useOwnMusicController"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center" />
-
-    <TextView
-        android:id="@+id/toString"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:gravity="center"
-        android:textStyle="bold" />
+        android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:importantForAccessibility="no" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/activation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="start" />
+
+        <Button
+            android:id="@+id/send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="send" />
+
+        <Button
+            android:id="@+id/send2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="send2" />
+
+        <Button
+            android:id="@+id/send3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="send3" />
+
+        <Button
+            android:id="@+id/clean"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="clean" />
+
+        <Button
+            android:id="@+id/stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="stop" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#03A9F4" />
+
+        <TextView
+            android:id="@+id/lyric"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/customIcon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/serviceName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/packageName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/base64Icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/useOwnMusicController"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/toString"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no" />
+    </LinearLayout>
+</ScrollView>

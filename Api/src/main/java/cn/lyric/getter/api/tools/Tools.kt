@@ -20,7 +20,6 @@ import java.io.ByteArrayOutputStream
 @SuppressLint("StaticFieldLeak")
 object Tools {
     private lateinit var lyricReceiver: LyricReceiver
-    private lateinit var receiverContext: Context
 
 
     /**
@@ -133,16 +132,15 @@ object Tools {
         } else {
             context.registerReceiver(lyricReceiver, intentFilter)
         }
-        receiverContext=context
     }
 
     /**
      * 注销歌词监听器
      *
      */
-    fun unregisterLyricListener() {
+    fun unregisterLyricListener(context: Context) {
         if (!::lyricReceiver.isInitialized) return
-        runCatching { receiverContext.unregisterReceiver(lyricReceiver) }
+        runCatching { context.unregisterReceiver(lyricReceiver) }
     }
 
 }

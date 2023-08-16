@@ -66,7 +66,7 @@ class MainActivity : Activity() {
     override fun onDestroy() {
         EventTools.stopLyric(applicationContext)
 //        取消注册歌词监听器
-        unregisterLyricListener(applicationContext)
+        unregisterLyricListener()
         super.onDestroy()
     }
 }

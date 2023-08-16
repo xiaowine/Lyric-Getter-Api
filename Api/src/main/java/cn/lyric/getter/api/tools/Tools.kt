@@ -17,9 +17,11 @@ import cn.lyric.getter.api.LyricListener
 import cn.lyric.getter.api.LyricReceiver
 import java.io.ByteArrayOutputStream
 
-
+@SuppressLint("StaticFieldLeak")
 object Tools {
     private lateinit var lyricReceiver: LyricReceiver
+    private lateinit var receiverContext: Context
+
 
     /**
      *
@@ -131,15 +133,16 @@ object Tools {
         } else {
             context.registerReceiver(lyricReceiver, intentFilter)
         }
+        receiverContext=context
     }
 
     /**
      * 注销歌词监听器
-     * @param [context] Context
+     *
      */
-    fun unregisterLyricListener(context: Context) {
+    fun unregisterLyricListener() {
         if (!::lyricReceiver.isInitialized) return
-        context.unregisterReceiver(lyricReceiver)
+        runCatching { receiverContext.unregisterReceiver(lyricReceiver) }
     }
 
 }

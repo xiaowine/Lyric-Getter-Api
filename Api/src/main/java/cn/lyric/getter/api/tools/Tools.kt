@@ -124,7 +124,7 @@ object Tools {
      */
     @SuppressLint("UnspecifiedRegisterReceiverFlag")
     fun registerLyricListener(context: Context, apiVersion: Int, lyricListener: LyricListener) {
-        if (apiVersion != EventTools.API_VERSION) return
+        if (apiVersion != LGA.API_VERSION) return
         val intentFilter = IntentFilter().apply { addAction("Lyric_Data") }
         lyricReceiver = LyricReceiver(lyricListener)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

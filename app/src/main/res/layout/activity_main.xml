@@ -27,17 +27,6 @@
             android:layout_height="wrap_content"
             android:text="send" />
 
-        <Button
-            android:id="@+id/send2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="send2" />
-
-        <Button
-            android:id="@+id/send3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="send3" />
 
         <Button
             android:id="@+id/clean"
@@ -72,13 +61,6 @@
 
         <TextView
             android:id="@+id/customIcon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center" />
-
-        <TextView
-            android:id="@+id/serviceName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

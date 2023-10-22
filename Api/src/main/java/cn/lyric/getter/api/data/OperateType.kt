@@ -1,6 +1,6 @@
 package cn.lyric.getter.api.data
 
-enum class DataType {
+enum class OperateType {
     STOP,
     UPDATE
 }

@@ -1,5 +1,7 @@
 package cn.lyric.getter.api.data
 
+import android.util.Log
+
 class ExtraData() {
     var extra: HashMap<String, Any> = HashMap()
     var base64Icon: String
@@ -86,6 +88,7 @@ class ExtraData() {
     override fun toString(): String {
         val str: StringBuilder = StringBuilder()
         extra.forEach { str.append("${it.key}=${it.value}") }
+        Log.d("ExtraData", str.toString())
         return str.toString()
     }
 }

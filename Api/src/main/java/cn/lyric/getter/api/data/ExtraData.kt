@@ -82,4 +82,8 @@ class ExtraData() {
         extra["packageName"] = packageName
         extra["delay"] = delay
     }
+
+    override fun toString(): String {
+        return extra.toString()
+    }
 }

@@ -1,12 +1,9 @@
-package cn.lyric.getter.api.tools
+package cn.lyric.getter.api
 
-import android.annotation.SuppressLint
 import android.content.Context
-import cn.lyric.getter.api.BuildConfig
 import cn.lyric.getter.api.data.ExtraData
 
-@SuppressLint("StaticFieldLeak")
-class LGA(private val context: Context) {
+class API(private val context: Context) {
     /**
      * Has enable
      * 是否启用
@@ -16,17 +13,17 @@ class LGA(private val context: Context) {
 
 
     /**
-     * Send lyric
+     *
      * 发送歌词（全参数）
      *
      * @param lyric [String] 歌词
-     * @param extra [HashMap] 额外参数，默认为null
+     * @param extra [HashMap] 额外参数
      */
-    fun sendLyric(lyric: String, extra: ExtraData? = null) {}
+    fun sendLyric(lyric: String, extra: ExtraData = ExtraData()) {}
 
 
     /**
-     * Clear lyric
+     * 清除歌词
      *
      */
     fun clearLyric() {}

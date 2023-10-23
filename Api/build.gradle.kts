@@ -4,7 +4,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("maven-publish")
 }
-val apiVersion = "6"
+val apiVersion = "5"
 android {
     namespace = "cn.lyric.getter.api"
     compileSdk = 33

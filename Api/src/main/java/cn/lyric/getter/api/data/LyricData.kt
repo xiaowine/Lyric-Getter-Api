@@ -8,7 +8,7 @@ import android.os.Parcelable
 @SuppressLint("ParcelClassLoader") class LyricData private constructor(parcel: Parcel) : Parcelable {
     var type: OperateType = OperateType.UPDATE
     var lyric: String = ""
-    var extraData: ExtraData? = null
+    var extraData: ExtraData = ExtraData()
 
     constructor() : this(Parcel.obtain())
 
@@ -17,7 +17,7 @@ import android.os.Parcelable
             writeInt(type.ordinal)
             writeString(lyric)
             val bundle = Bundle().apply {
-                extraData?.extra?.forEach {
+                extraData.extra.forEach {
                     when (it.value) {
                         BaseType.String -> putString(it.key, it.value as String)
                         BaseType.Int -> putInt(it.key, it.value as Int)
@@ -39,7 +39,7 @@ import android.os.Parcelable
     init {
         type = OperateType.values()[parcel.readInt()]
         lyric = parcel.readString() ?: ""
-        extraData?.extra = parcel.readBundle().let {
+        extraData.extra = parcel.readBundle().let {
             val hashMap = HashMap<String, Any>()
             it?.keySet()?.forEach { key ->
                 hashMap[key] = it.get(key) as Any

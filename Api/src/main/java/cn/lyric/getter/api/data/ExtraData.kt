@@ -60,9 +60,9 @@ class ExtraData() {
         extra.putAll(other.extra)
     }
 
-    constructor(base64Icon: String, customIcon: Boolean, useOwnMusicController: Boolean, packageName: String, delay: Int) : this() {
-        extra["base64Icon"] = base64Icon
+    constructor( customIcon: Boolean,base64Icon: String, useOwnMusicController: Boolean, packageName: String, delay: Int) : this() {
         extra["customIcon"] = customIcon
+        extra["base64Icon"] = base64Icon
         extra["useOwnMusicController"] = useOwnMusicController
         extra["packageName"] = packageName
         extra["delay"] = delay

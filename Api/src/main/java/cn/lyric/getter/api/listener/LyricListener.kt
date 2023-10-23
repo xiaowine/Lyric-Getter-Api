@@ -1,4 +1,4 @@
-package cn.lyric.getter.api
+package cn.lyric.getter.api.listener
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Build
 import cn.lyric.getter.api.data.OperateType
 import cn.lyric.getter.api.data.LyricData
-import cn.lyric.getter.api.listener.Listener
 
 abstract class LyricListener : Listener {
     /**

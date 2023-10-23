@@ -8,17 +8,17 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import cn.lyric.getter.api.LyricListener
+import cn.lyric.getter.api.listener.LyricListener
 import cn.lyric.getter.api.data.OperateType
 import cn.lyric.getter.api.data.LyricData
-import cn.lyric.getter.api.tools.LGA
+import cn.lyric.getter.api.API
 import cn.lyric.getter.api.tools.Tools
 import cn.lyric.getter.api.tools.Tools.registerLyricListener
 import cn.lyric.getter.api.tools.Tools.unregisterLyricListener
 
 
 class MainActivity : Activity() {
-    private val lga by lazy { LGA(applicationContext) }
+    private val lga by lazy { API(applicationContext) }
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +48,7 @@ class MainActivity : Activity() {
     @SuppressLint("SetTextI18n")
     fun start() {
         //        注册歌词监听器
-        registerLyricListener(applicationContext, LGA.API_VERSION, object : LyricListener() {
+        registerLyricListener(applicationContext, API.API_VERSION, object : LyricListener() {
             override fun onUpdate(lyricData: LyricData) {
                 findViewById<TextView>(R.id.lyric).text = "Lyric：${if (lyricData.type == OperateType.UPDATE) lyricData.lyric else " 暂停播放 "}"
                 findViewById<TextView>(R.id.type).text = "Type：${lyricData.type}"

@@ -2,11 +2,22 @@ package cn.lyric.getter.api.data
 
 class ExtraData() {
     var extra: HashMap<String, Any> = HashMap()
-    val base64Icon: String get() = getString("base64Icon", "")
-    val customIcon: Boolean get() = getBoolean("customIcon", false)
-    val useOwnMusicController: Boolean get() = getBoolean("useOwnMusicController", false)
-    val packageName: String get() = getString("packageName", "")
-    val delay: Int get() = getInt("delay", 0)
+    var base64Icon: String
+        get() = getString("base64Icon", "")
+        set(value) = setString("base64Icon", value)
+    var customIcon: Boolean
+        get() = getBoolean("customIcon", false)
+        set(value) = setBoolean("customIcon", value)
+    var useOwnMusicController: Boolean
+        get() = getBoolean("useOwnMusicController", false)
+        set(value) = setBoolean("useOwnMusicController", value)
+    var packageName: String
+        get() = getString("packageName", "")
+        set(value) = setString("packageName", value)
+    var delay: Int
+        get() = getInt("delay", 0)
+        set(value) = setInt("delay", value)
+
 
     fun getString(key: String, default: String): String {
         return (extra[key] ?: default).toString()
@@ -60,7 +71,7 @@ class ExtraData() {
         extra.putAll(other.extra)
     }
 
-    constructor( customIcon: Boolean,base64Icon: String, useOwnMusicController: Boolean, packageName: String, delay: Int) : this() {
+    constructor(customIcon: Boolean, base64Icon: String, useOwnMusicController: Boolean, packageName: String, delay: Int) : this() {
         extra["customIcon"] = customIcon
         extra["base64Icon"] = base64Icon
         extra["useOwnMusicController"] = useOwnMusicController

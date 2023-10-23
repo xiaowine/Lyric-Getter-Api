@@ -84,6 +84,8 @@ class ExtraData() {
     }
 
     override fun toString(): String {
-        return extra.toString()
+        val str: StringBuilder = StringBuilder()
+        extra.forEach { str.append("${it.key}=${it.value}") }
+        return str.toString()
     }
 }

@@ -6,15 +6,9 @@ import android.os.Parcel
 import android.os.Parcelable
 
 @SuppressLint("ParcelClassLoader") class LyricData private constructor(parcel: Parcel) : Parcelable {
-    var type: DataType = DataType.UPDATE
+    var type: OperateType = OperateType.UPDATE
     var lyric: String = ""
-    var customIcon = false
-    var serviceName: String = ""
-    var packageName: String = ""
-    var base64Icon: String = ""
-    var useOwnMusicController = false
-    var delay = 0
-    var extra: HashMap<String, Any>? = null
+    var extraData: ExtraData = ExtraData()
 
     constructor() : this(Parcel.obtain())
 
@@ -22,14 +16,8 @@ import android.os.Parcelable
         dest.apply {
             writeInt(type.ordinal)
             writeString(lyric)
-            writeInt(if (customIcon) 1 else 0)
-            writeString(serviceName)
-            writeString(packageName)
-            writeString(base64Icon)
-            writeInt(if (useOwnMusicController) 1 else 0)
-            writeInt(delay)
             val bundle = Bundle().apply {
-                extra?.forEach {
+                extraData.extra.forEach {
                     when (it.value) {
                         BaseType.String -> putString(it.key, it.value as String)
                         BaseType.Int -> putInt(it.key, it.value as Int)
@@ -49,15 +37,9 @@ import android.os.Parcelable
     }
 
     init {
-        type = DataType.values()[parcel.readInt()]
+        type = OperateType.values()[parcel.readInt()]
         lyric = parcel.readString() ?: ""
-        customIcon = parcel.readInt() != 0
-        serviceName = parcel.readString() ?: ""
-        packageName = parcel.readString() ?: ""
-        base64Icon = parcel.readString() ?: ""
-        useOwnMusicController = parcel.readInt() != 0
-        delay = parcel.readInt()
-        extra = parcel.readBundle().let {
+        extraData.extra = parcel.readBundle().let {
             val hashMap = HashMap<String, Any>()
             it?.keySet()?.forEach { key ->
                 hashMap[key] = it.get(key) as Any
@@ -67,12 +49,12 @@ import android.os.Parcelable
     }
 
     override fun toString(): String {
-        return "{\"type\":\"$type\",\"lyric\":\"$lyric\",\"customIcon\":$customIcon,\"serviceName\":\"$serviceName\",\"packageName\":\"$packageName\",\"base64Icon\":\"$base64Icon\",\"useOwnMusicController\":\"$useOwnMusicController\",\"delay\":\"$delay\",\"extra\":\"$extra\"}"
+        return "{\"type\":\"$type\",\"lyric\":\"$lyric\",\"extra\":\"$extraData\"}"
     }
 
     override fun equals(other: Any?): Boolean {
         if (other is LyricData) {
-            return type == other.type && lyric == other.lyric && customIcon == other.customIcon && serviceName == other.serviceName && packageName == other.packageName && base64Icon == other.base64Icon && useOwnMusicController == other.useOwnMusicController && delay == other.delay
+            return type == other.type && lyric == other.lyric
         }
         return false
     }
@@ -80,13 +62,7 @@ import android.os.Parcelable
     override fun hashCode(): Int {
         var result = type.hashCode()
         result = 31 * result + lyric.hashCode()
-        result = 31 * result + customIcon.hashCode()
-        result = 31 * result + serviceName.hashCode()
-        result = 31 * result + packageName.hashCode()
-        result = 31 * result + base64Icon.hashCode()
-        result = 31 * result + useOwnMusicController.hashCode()
-        result = 31 * result + delay
-        result = 31 * result + extra.hashCode()
+        result = 31 * result + extraData.hashCode()
         return result
     }
 

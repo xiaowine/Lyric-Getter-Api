@@ -57,7 +57,7 @@ dependencies {
 
 ```shrinker_config
 -keep class cn.lyric.getter.api.data.*{*;}
--keep class cn.lyric.getter.api.tools.EventTools{*;}
+-keep class cn.lyric.getter.api.API{*;}
 ```
 
 ## Star History

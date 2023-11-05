@@ -4,10 +4,10 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("maven-publish")
 }
-val apiVersion = "5"
+val apiVersion = "6"
 android {
     namespace = "cn.lyric.getter.api"
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
         minSdk = 21
         buildConfigField("int", "API_VERSION", apiVersion)

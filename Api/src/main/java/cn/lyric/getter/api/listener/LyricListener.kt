@@ -1,12 +1,11 @@
-package cn.lyric.getter.api
+package cn.lyric.getter.api.listener
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import cn.lyric.getter.api.data.DataType
+import cn.lyric.getter.api.data.OperateType
 import cn.lyric.getter.api.data.LyricData
-import cn.lyric.getter.api.listener.Listener
 
 abstract class LyricListener : Listener {
     /**
@@ -52,8 +51,8 @@ class LyricReceiver(private val lyricListener: LyricListener) : BroadcastReceive
             lyricListener.onReceived(lyricData)
 
             when (lyricData.type) {
-                DataType.UPDATE -> lyricListener.onUpdate(lyricData)
-                DataType.STOP -> lyricListener.onStop(lyricData)
+                OperateType.UPDATE -> lyricListener.onUpdate(lyricData)
+                OperateType.STOP -> lyricListener.onStop(lyricData)
             }
         }
     }

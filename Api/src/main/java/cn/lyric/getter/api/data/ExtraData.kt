@@ -1,8 +1,20 @@
 package cn.lyric.getter.api.data
 
-import android.util.Log
+import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 
-class ExtraData() {
+class ExtraData private constructor(parcel: Parcel) : Parcelable {
+    constructor() : this(Parcel.obtain())
+
+    constructor(customIcon: Boolean, base64Icon: String, useOwnMusicController: Boolean, packageName: String, delay: Int) : this() {
+        extra["customIcon"] = customIcon
+        extra["base64Icon"] = base64Icon
+        extra["useOwnMusicController"] = useOwnMusicController
+        extra["packageName"] = packageName
+        extra["delay"] = delay
+    }
+
     var extra: HashMap<String, Any> = HashMap()
     var base64Icon: String
         get() = getString("base64Icon", "")
@@ -77,18 +89,33 @@ class ExtraData() {
         extra.putAll(other)
     }
 
-    constructor(customIcon: Boolean, base64Icon: String, useOwnMusicController: Boolean, packageName: String, delay: Int) : this() {
-        extra["customIcon"] = customIcon
-        extra["base64Icon"] = base64Icon
-        extra["useOwnMusicController"] = useOwnMusicController
-        extra["packageName"] = packageName
-        extra["delay"] = delay
-    }
 
     override fun toString(): String {
         val str: StringBuilder = StringBuilder()
         extra.forEach { str.append("${it.key}=${it.value}") }
         return str.toString()
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.apply {
+            val bundle = Bundle().apply {
+                extra.forEach {
+                    when (it.value) {
+                        BaseType.String -> putString(it.key, it.value as String)
+                        BaseType.Int -> putInt(it.key, it.value as Int)
+                        BaseType.Boolean -> putBoolean(it.key, it.value as Boolean)
+                        BaseType.Float -> putFloat(it.key, it.value as Float)
+                        BaseType.Long -> putLong(it.key, it.value as Long)
+                        BaseType.Double -> putDouble(it.key, it.value as Double)
+                    }
+                }
+            }
+            writeBundle(bundle)
+        }
     }
 
     override fun hashCode(): Int {
@@ -100,5 +127,15 @@ class ExtraData() {
         if (javaClass != other?.javaClass) return false
         other as ExtraData
         return extra == other.extra
+    }
+
+    companion object CREATOR : Parcelable.Creator<ExtraData> {
+        override fun createFromParcel(parcel: Parcel): ExtraData {
+            return ExtraData(parcel)
+        }
+
+        override fun newArray(size: Int): Array<ExtraData?> {
+            return arrayOfNulls(size)
+        }
     }
 }

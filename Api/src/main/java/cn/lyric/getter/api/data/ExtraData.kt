@@ -90,4 +90,15 @@ class ExtraData() {
         extra.forEach { str.append("${it.key}=${it.value}") }
         return str.toString()
     }
+
+    override fun hashCode(): Int {
+        return extra.hashCode()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+        other as ExtraData
+        return extra == other.extra
+    }
 }

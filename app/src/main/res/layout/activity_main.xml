@@ -19,26 +19,26 @@
             android:id="@+id/start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="start" />
+            android:text="开始监听歌词" />
 
         <Button
             android:id="@+id/send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="send" />
+            android:text="发送歌词" />
 
 
         <Button
             android:id="@+id/clean"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="clean" />
+            android:text="清楚歌词" />
 
         <Button
             android:id="@+id/stop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="stop" />
+            android:text="停止监听歌词" />
 
         <TextView
             android:layout_width="match_parent"

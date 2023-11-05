@@ -12,6 +12,7 @@ import cn.lyric.getter.api.listener.LyricListener
 import cn.lyric.getter.api.data.OperateType
 import cn.lyric.getter.api.data.LyricData
 import cn.lyric.getter.api.API
+import cn.lyric.getter.api.data.ExtraData
 import cn.lyric.getter.api.listener.LyricReceiver
 import cn.lyric.getter.api.tools.Tools
 import cn.lyric.getter.api.tools.Tools.registerLyricListener
@@ -33,14 +34,20 @@ class MainActivity : Activity() {
             start()
         }
         findViewById<Button>(R.id.send).setOnClickListener {
-            lga.sendLyric("${(0..1000).random()}${getString(R.string.app_name)}")
+            lga.sendLyric("${(0..1000).random()}${getString(R.string.app_name)}", extra = ExtraData().apply {
+                packageName = "cn.lyric.getter.api.demo"
+                customIcon = true
+                base64Icon = Tools.drawableToBase64(getDrawable(R.mipmap.ic_launcher)!!)
+                useOwnMusicController = false
+                delay = 0
+            })
         }
         findViewById<Button>(R.id.clean).setOnClickListener {
             lga.clearLyric()
         }
 //        取消监听
         findViewById<Button>(R.id.stop).setOnClickListener {
-            unregisterLyricListener(applicationContext,receiver)
+            unregisterLyricListener(applicationContext, receiver)
         }
 
 
@@ -53,7 +60,7 @@ class MainActivity : Activity() {
             override fun onUpdate(lyricData: LyricData) {
                 findViewById<TextView>(R.id.lyric).text = "Lyric：${if (lyricData.type == OperateType.UPDATE) lyricData.lyric else " 暂停播放 "}"
                 findViewById<TextView>(R.id.type).text = "Type：${lyricData.type}"
-                findViewById<TextView>(R.id.customIcon).text = "CustomIcon：${lyricData.extraData.customIcon}"
+                findViewById<TextView>(R.id.customIcon).text = "CustomIcon：${lyricData.extraData.extra}"
                 findViewById<TextView>(R.id.packageName).text = "PackageName：${lyricData.extraData.packageName}"
                 findViewById<TextView>(R.id.base64Icon).text = "Base64Icon：${lyricData.extraData.base64Icon}"
                 findViewById<TextView>(R.id.useOwnMusicController).text = "useOwnMusicController：${lyricData.extraData.useOwnMusicController}"

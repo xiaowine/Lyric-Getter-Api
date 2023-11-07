@@ -17,3 +17,18 @@ buildscript {
 tasks.register("Delete", Delete::class) {
     delete(rootProject.buildDir)
 }
+
+<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+
+
+allprojects {
+    repositories {
+        // ...
+        maven { url 'https://jitpack.io' }
+    }
+}

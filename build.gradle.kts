@@ -17,3 +17,10 @@ buildscript {
 tasks.register("Delete", Delete::class) {
     delete(rootProject.buildDir)
 }
+
+allprojects {
+    repositories {
+        // ...
+        maven("https://jitpack.io")
+    }
+}

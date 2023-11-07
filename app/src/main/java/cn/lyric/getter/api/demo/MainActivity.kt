@@ -20,7 +20,7 @@ import cn.lyric.getter.api.tools.Tools.unregisterLyricListener
 
 
 class MainActivity : Activity() {
-    private val lga by lazy { API(applicationContext) }
+    private val lga by lazy { API() }
     private lateinit var receiver: LyricReceiver
 
     @SuppressLint("SetTextI18n")

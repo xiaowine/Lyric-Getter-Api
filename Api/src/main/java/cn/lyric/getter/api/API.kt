@@ -3,7 +3,7 @@ package cn.lyric.getter.api
 import android.content.Context
 import cn.lyric.getter.api.data.ExtraData
 
-class API(private val context: Context) {
+class API {
     /**
      * Has enable
      * 是否启用

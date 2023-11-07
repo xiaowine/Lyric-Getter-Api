@@ -47,3 +47,4 @@ afterEvaluate {
 dependencies {
 	        implementation 'com.github.xiaowine:Lyric-Getter-Api:6.0.0dev'
 	}
+

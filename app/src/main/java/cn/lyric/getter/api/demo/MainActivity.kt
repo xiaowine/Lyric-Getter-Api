@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import cn.lyric.getter.api.listener.LyricListener
-import cn.lyric.getter.api.data.OperateType
+import cn.lyric.getter.api.data.type.OperateType
 import cn.lyric.getter.api.data.LyricData
 import cn.lyric.getter.api.API
 import cn.lyric.getter.api.data.ExtraData

@@ -1,4 +1,4 @@
-package cn.lyric.getter.api.data
+package cn.lyric.getter.api.data.type
 
 enum class BaseType {
     String,

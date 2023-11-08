@@ -4,10 +4,23 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
+import cn.lyric.getter.api.data.type.OperateType
 
 @SuppressLint("ParcelClassLoader") class LyricData private constructor(parcel: Parcel) : Parcelable {
+
+    /**
+     * Type [OperateType] 歌词数据类型
+     */
     var type: OperateType = OperateType.UPDATE
+
+    /**
+     * Lyric [String] 歌词
+     */
     var lyric: String = ""
+
+    /**
+     * Extra data [ExtraData] 额外数据
+     */
     var extraData: ExtraData = ExtraData()
 
     constructor() : this(Parcel.obtain())
@@ -32,9 +45,7 @@ import android.os.Parcelable
         }
     }
 
-    override fun describeContents(): Int {
-        return 0
-    }
+    override fun describeContents(): Int = 0
 
     init {
         type = OperateType.values()[parcel.readInt()]

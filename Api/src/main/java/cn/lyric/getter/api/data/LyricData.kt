@@ -4,10 +4,23 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
+import cn.lyric.getter.api.data.type.OperateType
 
 @SuppressLint("ParcelClassLoader") class LyricData private constructor(parcel: Parcel) : Parcelable {
+
+    /**
+     * Type [OperateType] 歌词数据类型
+     */
     var type: OperateType = OperateType.UPDATE
+
+    /**
+     * Lyric [String] 歌词
+     */
     var lyric: String = ""
+
+    /**
+     * Extra data [ExtraData] 额外数据
+     */
     var extraData: ExtraData = ExtraData()
 
     constructor() : this(Parcel.obtain())
@@ -17,14 +30,14 @@ import android.os.Parcelable
             writeInt(type.ordinal)
             writeString(lyric)
             val bundle = Bundle().apply {
-                extraData.extra.forEach {
-                    when (it.value) {
-                        BaseType.String -> putString(it.key, it.value as String)
-                        BaseType.Int -> putInt(it.key, it.value as Int)
-                        BaseType.Boolean -> putBoolean(it.key, it.value as Boolean)
-                        BaseType.Float -> putFloat(it.key, it.value as Float)
-                        BaseType.Long -> putLong(it.key, it.value as Long)
-                        BaseType.Double -> putDouble(it.key, it.value as Double)
+                extraData.extra.forEach { (key, value) ->
+                    when (value) {
+                        is String -> putString(key, value)
+                        is Int -> putInt(key, value)
+                        is Boolean -> putBoolean(key, value)
+                        is Float -> putFloat(key, value)
+                        is Long -> putLong(key, value)
+                        is Double -> putDouble(key, value)
                     }
                 }
             }
@@ -32,9 +45,7 @@ import android.os.Parcelable
         }
     }
 
-    override fun describeContents(): Int {
-        return 0
-    }
+    override fun describeContents(): Int = 0
 
     init {
         type = OperateType.values()[parcel.readInt()]

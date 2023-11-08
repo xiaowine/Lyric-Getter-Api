@@ -1,21 +1,44 @@
 package cn.lyric.getter.api.data
 
-import android.util.Log
-
 class ExtraData() {
     var extra: HashMap<String, Any> = HashMap()
+
+
+    /**
+     * base64Icon [String] 用于自定义图标的Base64
+     */
     var base64Icon: String
         get() = getString("base64Icon", "")
         set(value) = setString("base64Icon", value)
+
+
+    /**
+     * customIcon [Boolean] 是否使用自定义图标
+     */
     var customIcon: Boolean
         get() = getBoolean("customIcon", false)
         set(value) = setBoolean("customIcon", value)
+
+
+    /**
+     * useOwnMusicController [Boolean] 是否使用自定义音乐控制器（不会系统控制暂停，由音乐软件自行控制）
+     */
     var useOwnMusicController: Boolean
         get() = getBoolean("useOwnMusicController", false)
         set(value) = setBoolean("useOwnMusicController", value)
+
+
+    /**
+     * packageName [String] 音乐软件包名
+     */
     var packageName: String
         get() = getString("packageName", "")
         set(value) = setString("packageName", value)
+
+
+    /**
+     * delay [Int] 延迟时间（毫秒）（此句歌词显示时间，用于控制歌词速度）
+     */
     var delay: Int
         get() = getInt("delay", 0)
         set(value) = setInt("delay", value)
@@ -69,10 +92,20 @@ class ExtraData() {
         extra[key] = value
     }
 
+    /**
+     * 合并ExtraData
+     *
+     * @param other [ExtraData]
+     */
     fun mergeExtra(other: ExtraData) {
         extra.putAll(other.extra)
     }
 
+    /**
+     * 合并ExtraData的HashMap（核心数据）
+     *
+     * @param other [HashMap<String, Any>]
+     */
     fun mergeExtra(other: HashMap<String, Any>) {
         extra.putAll(other)
     }
@@ -87,7 +120,7 @@ class ExtraData() {
 
     override fun toString(): String {
         val str: StringBuilder = StringBuilder()
-        extra.forEach { str.append("${it.key}=${it.value}") }
+        extra.forEach { str.append("${it.key}=${it.value},") }
         return str.toString()
     }
 
